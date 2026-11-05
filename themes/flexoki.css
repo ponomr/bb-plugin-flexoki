@@ -214,6 +214,11 @@ form[class*="group/promptbox"] .ProseMirror { font-size: var(--composer); line-h
   line-height: var(--text-sm--line-height);
 }
 
+/* Send button: soft cyan tint instead of a solid ink/paper block.
+   Light: cyan-100 fill, cyan-800 icon (7.0:1). Dark: cyan-850 fill, cyan-200 icon (6.7:1). */
+div[class*="group/send"] { background-color: #BFE8D9; color: #164F4A; }
+.dark div[class*="group/send"] { background-color: #143F3C; color: #87D3C3; }
+
 /* Sidebar: one size for project names, threads and hints; 30px rows. */
 [data-sidebar="sidebar"] {
   --text-xs: var(--text-sm);
