@@ -1,0 +1,60 @@
+{
+  "name": "bb-plugin-flexoki",
+  "version": "0.1.0",
+  "description": "Bring Steph Ango's Flexoki ink-and-paper palette to BB: light and dark UI, matching syntax and terminal colours.",
+  "type": "module",
+  "license": "MIT",
+  "author": "ponomr",
+  "repository": {
+    "url": "https://github.com/ponomr/bb-plugin-flexoki.git",
+    "type": "git"
+  },
+  "homepage": "https://github.com/ponomr/bb-plugin-flexoki#readme",
+  "bugs": {
+    "url": "https://github.com/ponomr/bb-plugin-flexoki/issues"
+  },
+  "engines": {
+    "bbPluginSdk": ">=0.6.79 <0.7.0",
+    "bb": ">=0.47.1 <1.0.0"
+  },
+  "files": [
+    "server.ts",
+    "dist/",
+    "themes/",
+    "assets/",
+    "screenshots/",
+    "README.md",
+    "PLUGIN_OVERVIEW.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "bb plugin build"
+  },
+  "bb": {
+    "name": "Flexoki",
+    "description": "Bring Steph Ango's Flexoki ink-and-paper palette to BB: light and dark UI, matching syntax and terminal colours.",
+    "branding": {
+      "icon": "./assets/flexoki.svg"
+    },
+    "server": "./server.ts",
+    "skills": [],
+    "themes": [
+      {
+        "id": "flexoki",
+        "name": "Flexoki",
+        "description": "Inky light and dark palettes from Flexoki by Steph Ango.",
+        "css": "./themes/flexoki.css",
+        "codeTheme": {
+          "dark": "./themes/flexoki-dark.json",
+          "light": "./themes/flexoki-light.json"
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@get-bb/plugin-sdk": "0.6.79"
+  }
+}
