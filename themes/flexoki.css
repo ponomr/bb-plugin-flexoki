@@ -205,14 +205,8 @@ b, strong { font-weight: 600; }
 .leading-relaxed.break-words pre,
 .leading-relaxed.break-words pre code { font-size: var(--chat-pre); line-height: var(--chat-pre-lh); font-weight: 400; }
 
-/* Composer text and its control labels */
+/* Composer text */
 form[class*="group/promptbox"] .ProseMirror { font-size: var(--composer); line-height: 1.5rem; }
-[data-new-thread-footer] > div:first-child button,
-[data-promptbox-action-row] button:has([data-promptbox-hide-compact]) {
-  font-weight: 400;
-  font-size: var(--text-sm);
-  line-height: var(--text-sm--line-height);
-}
 
 /* Sidebar: one size for project names, threads and hints; 30px rows. */
 [data-sidebar="sidebar"] {
@@ -221,3 +215,103 @@ form[class*="group/promptbox"] .ProseMirror { font-size: var(--composer); line-h
 }
 [data-sidebar="group-label"] { line-height: 1.75rem; }
 :root { --bb-sidebar-row-height: 1.875rem; }
+
+/* ---------- Composer ----------
+   A context strip (project, machine) sits on top and the prompt slab overlaps
+   its lower edge. bb renders those controls in [data-new-thread-footer] below
+   the box, so on the new-thread page the footer is moved above it with `order`
+   and drawn as the strip. Slab: 20px corners, hairline outline; strip: 40px
+   visible, 13px inset, 18px corners; send button: a 32px ink circle. */
+:root,
+.light {
+  --composer-surface: #FFFCF0;       /* paper */
+  --composer-outline: #DAD8CE;       /* ui-2 */
+  --composer-strip: #E6E4D9;         /* ui */
+  --composer-placeholder: #9F9D96;   /* 400 */
+}
+.dark {
+  --composer-surface: #282726;       /* ui */
+  --composer-outline: #403E3C;       /* ui-3 */
+  --composer-strip: #1C1B1A;         /* bg-2 */
+  --composer-placeholder: #6F6E69;   /* 600 */
+}
+
+/* Slab */
+form[data-promptbox] {
+  background-color: var(--composer-surface);
+  border: 0.5px solid var(--composer-outline);
+  border-radius: 1.25rem;
+  box-shadow: none;
+}
+form[data-promptbox] .ProseMirror p.is-editor-empty:first-child::before {
+  color: var(--composer-placeholder);
+  opacity: 1;
+}
+
+/* Context strip above the slab (new-thread page only) */
+[data-promptbox-shell]:has(> [data-new-thread-footer]) {
+  display: flex;
+  flex-direction: column;
+}
+[data-promptbox-shell] > [data-new-thread-footer] {
+  order: -1;
+  position: relative;
+  z-index: 0;
+  margin: 0 0.8125rem -1.25rem;          /* 13px inset; tucks 20px under the slab */
+  padding: 0 0.75rem 1.25rem;
+  min-height: 3.75rem;                   /* 40px visible + 20px hidden */
+  background-color: var(--composer-strip);
+  border-radius: 1.125rem 1.125rem 0 0;
+}
+[data-promptbox-shell] > [data-new-thread-footer] ~ [data-composer-box],
+[data-promptbox-shell]:has(> [data-new-thread-footer]) > [data-composer-box] {
+  position: relative;
+  z-index: 1;
+}
+[data-promptbox-shell]:has(> [data-new-thread-footer]) [data-promptbox-editor-scroll] {
+  min-height: 3.25rem !important;        /* overrides bb's inline 80px */
+}
+[data-promptbox-shell]:has(> [data-new-thread-footer]) > div:first-child {
+  order: -2;                             /* scheduled-send cards stay above the strip */
+}
+[data-new-thread-footer] > div:first-child button,
+[data-new-thread-footer] > div:first-child button:hover {
+  color: var(--ink);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+@media (width <= 767px) {
+  [data-promptbox-shell] > [data-new-thread-footer] {
+    margin-inline: 0.5rem;
+    padding-inline: 0.5rem;
+  }
+}
+
+/* Action row: "+", model name and mic in ink; reasoning level muted */
+[data-promptbox-action-row] > [data-promptbox-standard-actions]:first-child > button:first-child,
+[data-promptbox-action-row] [data-promptbox-standard-actions] > span > button {
+  color: var(--ink);
+}
+[data-promptbox-action-row] button:has([data-promptbox-hide-compact]),
+[data-promptbox-action-row] button:has([data-promptbox-hide-compact]):hover {
+  color: var(--ink);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+[data-promptbox-action-row] [data-promptbox-hide-compact] {
+  color: var(--readback-foreground);
+}
+
+/* Send button: ink circle with a paper icon */
+[class*="group/send"] {
+  background-color: var(--ink);
+  color: var(--canvas);
+  border-radius: 9999px;
+}
+[class*="group/send"] [data-promptbox-submit-action] {
+  width: 2rem;
+  padding: 0;
+  border-radius: 9999px;
+}
