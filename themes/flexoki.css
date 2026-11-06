@@ -280,8 +280,8 @@ form[data-promptbox] .ProseMirror p.is-editor-empty:first-child::before {
 [data-new-thread-footer] button:hover {
   color: var(--ink);
   font-weight: 400;
-  font-size: 0.8125rem;                  /* 13px: quieter than the 14px prompt text */
-  line-height: 1.25rem;
+  font-size: 0.75rem;                    /* 12px: quieter than the 14px prompt text */
+  line-height: 1.125rem;
 }
 /* New-thread page: the composer sits at the bottom, where it stays once the thread starts. */
 [data-testid="root-compose-compact-home"] {
