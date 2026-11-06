@@ -225,15 +225,17 @@ form[class*="group/promptbox"] .ProseMirror { font-size: var(--composer); line-h
 :root,
 .light {
   --composer-surface: #FFFCF0;       /* paper */
-  --composer-outline: #DAD8CE;       /* ui-2 */
+  --composer-outline: #CECDC3;       /* ui-3: paper slab on paper canvas needs a firmer edge */
   --composer-strip: #E6E4D9;         /* ui */
   --composer-placeholder: #9F9D96;   /* 400 */
+  --composer-shadow: 0 1px 2px rgb(16 15 15 / 0.04), 0 6px 20px rgb(16 15 15 / 0.07);
 }
 .dark {
   --composer-surface: #282726;       /* ui */
   --composer-outline: #403E3C;       /* ui-3 */
   --composer-strip: #1C1B1A;         /* bg-2 */
   --composer-placeholder: #6F6E69;   /* 600 */
+  --composer-shadow: none;
 }
 
 /* Slab */
@@ -241,7 +243,7 @@ form[data-promptbox] {
   background-color: var(--composer-surface);
   border: 0.5px solid var(--composer-outline);
   border-radius: 1.25rem;
-  box-shadow: none;
+  box-shadow: var(--composer-shadow);
 }
 form[data-promptbox] .ProseMirror p.is-editor-empty:first-child::before {
   color: var(--composer-placeholder);
@@ -274,12 +276,17 @@ form[data-promptbox] .ProseMirror p.is-editor-empty:first-child::before {
 [data-promptbox-shell]:has(> [data-new-thread-footer]) > div:first-child {
   order: -2;                             /* scheduled-send cards stay above the strip */
 }
-[data-new-thread-footer] > div:first-child button,
-[data-new-thread-footer] > div:first-child button:hover {
+[data-new-thread-footer] button,
+[data-new-thread-footer] button:hover {
   color: var(--ink);
   font-weight: 400;
-  font-size: var(--text-sm);
-  line-height: var(--text-sm--line-height);
+  font-size: 0.75rem;                    /* 12px: quieter than the 14px prompt text */
+  line-height: 1.125rem;
+}
+/* New-thread page: the composer sits at the bottom, where it stays once the thread starts. */
+[data-testid="root-compose-compact-home"] {
+  min-height: 100%;
+  justify-content: flex-end;
 }
 @media (width <= 767px) {
   [data-promptbox-shell] > [data-new-thread-footer] {
