@@ -1,6 +1,6 @@
 {
   "name": "bb-plugin-flexoki",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Bring Steph Ango's Flexoki ink-and-paper palette to BB: light and dark UI, matching syntax and terminal colours.",
   "type": "module",
   "license": "MIT",

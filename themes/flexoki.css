@@ -283,10 +283,12 @@ form[data-promptbox] .ProseMirror p.is-editor-empty:first-child::before {
   font-size: 0.75rem;                    /* 12px: quieter than the 14px prompt text */
   line-height: 1.125rem;
 }
-/* New-thread page: the composer sits at the bottom, where it stays once the thread starts. */
-[data-testid="root-compose-compact-home"] {
-  min-height: 100%;
-  justify-content: flex-end;
+/* Center the desktop new-thread composer, leaving room below for BB's command menu. */
+@media (width >= 768px) {
+  [data-testid="root-compose-compact-home"] {
+    min-height: 100%;
+    justify-content: center;
+  }
 }
 @media (width <= 767px) {
   [data-promptbox-shell] > [data-new-thread-footer] {
